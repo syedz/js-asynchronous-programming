@@ -1,9 +1,7 @@
 /*
-  Observable is just like an array. In an array all of the data is stored in
+  Obserable is just like an array. In an array all of the data is stored in
   memory. Obserable no data is stored in memory, items arrive over time
   asynchronously.
-
-  THey are not stored in memory anywhere.
 
   Think of events as first-class collections. This way we can use all of the
   methods we already know.
@@ -21,6 +19,8 @@ var handler = function(e) {
 button.addEventListener('click', handler);
 */
 
+var clicks = Observable.fromEvent(button, 'click');
+
 
 
 
@@ -28,12 +28,20 @@ button.addEventListener('click', handler);
   Asynchronous collection
 
   forEach() with Observables works differently
-*/
-var clicks = Observable.fromEvent(button, 'click');
 
-var subscription = clicks.forEach(
-  function onNext(e) {
-    alert('clicked');
+  With Observable, forEach() is waited for before any events are carried out.
+  And when it's called, it promises that it will hook up an event listener.
+
+  Just creating Observables causes nothing to happen, have to forEach over them.
+*/
+var points =
+  clicks.map(function(e) {
+    return {x: e.clientX, y: e.clientY};
+  });
+
+var subscription = points.forEach(
+  function onNext(point) {
+    alert('clicked:' + JSON.stringify(point));
     subscription.dispose();
   },
   function onError(error) {
