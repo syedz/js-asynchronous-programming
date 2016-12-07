@@ -3,7 +3,10 @@
   memory. Obserable no data is stored in memory, items arrive over time
   asynchronously.
 
-  THey are not stored in memory anywhere.
+  They are not stored in memory anywhere.
+
+  Events, and asynchronous requests, and animations can all be modeled as
+  asynchronous collections that arrive over time.
 
   Think of events as first-class collections. This way we can use all of the
   methods we already know.
@@ -27,7 +30,7 @@ button.addEventListener('click', handler);
 /*
   Asynchronous collection
 
-  forEach() with Observables works differently
+  forEach() with Observables works differently. Try/catch doesn't work here.
 */
 var clicks = Observable.fromEvent(button, 'click');
 

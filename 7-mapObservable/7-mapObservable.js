@@ -19,9 +19,6 @@ var handler = function(e) {
 button.addEventListener('click', handler);
 */
 
-var clicks = Observable.fromEvent(button, 'click');
-
-
 
 
 /*
@@ -34,6 +31,9 @@ var clicks = Observable.fromEvent(button, 'click');
 
   Just creating Observables causes nothing to happen, have to forEach over them.
 */
+
+var clicks = Observable.fromEvent(button, 'click');
+
 var points =
   clicks.map(function(e) {
     return {x: e.clientX, y: e.clientY};
